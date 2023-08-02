@@ -349,7 +349,7 @@
   SSHClient* client = [self clientForKey:key];
   if (client) {
     if ([self isConnected:key result:result]) {
-      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NMSFTP* sftpSession = [NMSFTP connectWithSession:client._session];
         if (sftpSession) {
         sftpSession.bufferSize *= 20;
@@ -527,7 +527,7 @@
   if (client) {
     if ([self isConnected:key result:result] &&
         [self isSFTPConnected:client._sftpSession result:result]) {
-      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         client.delegate = self;
         BOOL res = [client sftpUpload:filePath toPath:toPath];
         if (res) {
