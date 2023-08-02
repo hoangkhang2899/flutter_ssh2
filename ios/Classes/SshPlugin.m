@@ -352,6 +352,7 @@
       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NMSFTP* sftpSession = [NMSFTP connectWithSession:client._session];
         if (sftpSession) {
+        sftpSession.bufferSize *= 20;
           client._sftpSession = sftpSession;
           NSLog(@"SFTP connected");
           result(@"sftp_connected");
